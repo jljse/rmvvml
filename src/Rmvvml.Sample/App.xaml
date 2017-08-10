@@ -1,0 +1,33 @@
+﻿<Application x:Class="Rmvvml.Sample.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:rmvvml="clr-namespace:Rmvvml;assembly=Rmvvml"
+             xmlns:local="clr-namespace:Rmvvml.Sample"
+             Startup="Application_Startup">
+    <Application.Resources>
+        <!-- windowをコントロールする -->
+        <!-- DataContextを一番上で設定しないと動かないかも... -->
+        <rmvvml:WindowsControl
+            x:Key="WindowsControl"
+            ItemsSource="{Binding ItemsSource}"
+            >
+            <rmvvml:WindowsControl.DataContext>
+                <rmvvml:WindowsControlViewModel />
+            </rmvvml:WindowsControl.DataContext>
+        </rmvvml:WindowsControl>
+
+        <DataTemplate DataType="{x:Type rmvvml:MessageBoxWindowViewModel}">
+            <!-- MessageBoxは特殊なので専用のクラス -->
+            <rmvvml:MessageBoxWindowHandler />
+        </DataTemplate>
+
+
+        <!-- ViewModelとViewの対応関係 TemplateにWindowを入れるとXAMLパースエラーになるけど動くから無視だ！ -->
+        <DataTemplate DataType="{x:Type local:MainWindowVM}">
+            <local:MainWindow />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type local:ChildWindowVM}">
+            <local:ChildWindow />
+        </DataTemplate>
+    </Application.Resources>
+</Application>
