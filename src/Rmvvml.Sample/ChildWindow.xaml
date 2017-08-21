@@ -4,9 +4,29 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Rmvvml.Sample"
+        xmlns:rmvvml="clr-namespace:Rmvvml;assembly=Rmvvml"
         mc:Ignorable="d"
         Title="ChildWindow" Height="300" Width="300">
-    <Grid>
-        <Button Content="close child" Command="{Binding CloseChildCommand}" />
+    <Grid Margin="0,10,0,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Orientation="Horizontal">
+            <StackPanel.Resources>
+                <rmvvml:EnumToRadioButtonConverter x:Key="e2r" />
+            </StackPanel.Resources>
+            
+            <TextBlock Text="{Binding RadioSelectedValue}" />
+            <RadioButton Content="AAA" IsChecked="{Binding RadioSelectedValue, Converter={StaticResource e2r}, ConverterParameter=AAA}" />
+            <RadioButton Content="BBB" IsChecked="{Binding RadioSelectedValue, Converter={StaticResource e2r}, ConverterParameter=BBB}" />
+            <RadioButton Content="CCC" IsChecked="{Binding RadioSelectedValue, Converter={StaticResource e2r}, ConverterParameter=CCC}" />
+        </StackPanel>
+        <StackPanel Grid.Row="1" Orientation="Horizontal">
+            <TextBox Text="focus" local:TextBoxAtt.FocusAction="{Binding FocusTextBoxAction}" />
+            <Button Content="call" Command="{Binding CallButtonCommand}" />
+        </StackPanel>
+        <Button Grid.Row="2" Content="close child" Command="{Binding CloseChildCommand}" />
     </Grid>
 </Window>

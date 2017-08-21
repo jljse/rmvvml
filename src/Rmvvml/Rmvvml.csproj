@@ -59,6 +59,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AttachedPropertyAction.cs" />
+    <Compile Include="EnumToRadioButtonConverter.cs" />
     <Compile Include="MessageBoxWindowHandler.cs" />
     <Compile Include="MultiSelectorSelectedItemsHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
