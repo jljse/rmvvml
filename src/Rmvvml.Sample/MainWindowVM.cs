@@ -2,6 +2,7 @@
 using GalaSoft.MvvmLight.Command;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,6 +11,14 @@ namespace Rmvvml.Sample
 {
     class MainWindowVM : ViewModelBase
     {
+        public MainWindowVM()
+        {
+            for(var i = 0; i < 100; ++i)
+            {
+                DataGridSource.Add(new ItemVM());
+            }
+        }
+
         #region ShowChildCommand
         RelayCommand _ShowChildCommand;
         public RelayCommand ShowChildCommand
@@ -46,7 +55,8 @@ namespace Rmvvml.Sample
         async void OnQueryClosingCommand()
         {
             // 確認ダイアログ
-            var result = await App.WindowsControlViewModel.ShowMessageAsync(new MessageBoxWindowViewModel { Message = "are you sure?", Button = System.Windows.MessageBoxButton.YesNo });
+            var result = await App.WindowsControlViewModel.ShowMessageAsync(
+                new MessageBoxWindowViewModel { Caption = "msg", Message = "are you sure?", Button = System.Windows.MessageBoxButton.YesNo });
             if (result == System.Windows.MessageBoxResult.Yes)
             {
                 // QueryClosingBehaviorを使う場合、必ずVM側から能動的に閉じる流れになる
@@ -55,5 +65,14 @@ namespace Rmvvml.Sample
             }
         }
         #endregion
+
+        #region DataGridSource
+        public ObservableCollection<ItemVM> DataGridSource { get; } = new ObservableCollection<ItemVM>();
+        #endregion
+    }
+
+    class ItemVM : ViewModelBase
+    {
+
     }
 }

@@ -12,6 +12,29 @@
         <rmvvml:QueryClosingBehavior IsClosingAccepted="{Binding IsClosingAccepted}" QueryClosingCommand="{Binding QueryClosingCommand}" />
     </i:Interaction.Behaviors>
     <Grid>
-        <Button Content="show child" Command="{Binding ShowChildCommand}" />
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Button Grid.Row="0" Content="show child" Command="{Binding ShowChildCommand}" />
+        <DataGrid Grid.Row="1" ItemsSource="{Binding DataGridSource}" AutoGenerateColumns="False"
+                  AllowDrop="True"
+                  >
+            <i:Interaction.Behaviors>
+                <rmvvml:AutoScrollByDragBehavior />
+            </i:Interaction.Behaviors>
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="AAAAAAAAAAAAAA" />
+                <DataGridTextColumn Header="BBBBBBBBBBBBBB" />
+                <DataGridTextColumn Header="CCCCCCCCCCCCCC" />
+                <DataGridTemplateColumn Header="XXXXXXXXXXXXX">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="b1" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Window>
