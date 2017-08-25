@@ -61,6 +61,7 @@
   <ItemGroup>
     <Compile Include="AttachedPropertyAction.cs" />
     <Compile Include="AutoScrollByDragBehavior.cs" />
+    <Compile Include="BindingProxy.cs" />
     <Compile Include="EnumToRadioButtonConverter.cs" />
     <Compile Include="MessageBoxWindowHandler.cs" />
     <Compile Include="MultiSelectorSelectedItemsHandler.cs" />
