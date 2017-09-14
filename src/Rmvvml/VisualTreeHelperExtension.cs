@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Interactivity;
 using System.Windows.Media;
 
 namespace Rmvvml
@@ -35,7 +36,7 @@ namespace Rmvvml
         /// <returns></returns>
         public static IEnumerable<DependencyObject> Ancestors(DependencyObject obj)
         {
-            return Ancestors(obj).Skip(1);
+            return AncestorsOrSelf(obj).Skip(1);
         }
 
         /// <summary>
@@ -69,6 +70,18 @@ namespace Rmvvml
         public static IEnumerable<DependencyObject> Descendants(DependencyObject obj)
         {
             return DescendantsOrSelf(obj).Skip(1);
+        }
+
+        /// <summary>
+        /// 列挙されたオブジェクトのBehaviorをすべて列挙します
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="objects"></param>
+        /// <returns></returns>
+        public static IEnumerable<Behavior> Behaviors<T>(this IEnumerable<T> objects)
+            where T : DependencyObject
+        {
+            return objects.SelectMany(o => Interaction.GetBehaviors(o));
         }
     }
 }
