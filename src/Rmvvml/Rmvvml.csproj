@@ -66,13 +66,16 @@
     <Compile Include="DragBehavior.cs" />
     <Compile Include="DropBehavior.cs" />
     <Compile Include="EnumToRadioButtonConverter.cs" />
+    <Compile Include="IEnumerableExtension.cs" />
     <Compile Include="MessageBoxWindowHandler.cs" />
+    <Compile Include="MovableInCanvasBehavior.cs" />
     <Compile Include="MultiSelectorSelectedItemsHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QueryClosingBehavior.cs" />
     <Compile Include="MultiSelectorAtt.cs" />
     <Compile Include="RestrictDesiredSize.cs" />
     <Compile Include="SimpleAdornerBase.cs" />
+    <Compile Include="ResizableBehavior.cs" />
     <Compile Include="ViewModelBaseExtension.cs" />
     <Compile Include="VisualTreeHelperExtension.cs" />
     <Compile Include="WindowsControl.cs" />
