@@ -61,6 +61,7 @@
   <ItemGroup>
     <Compile Include="AttachedPropertyAction.cs" />
     <Compile Include="AutoScrollByDragBehavior.cs" />
+    <Compile Include="BindableActualSizeBehavior.cs" />
     <Compile Include="BindingProxy.cs" />
     <Compile Include="DependencyPropertyChangedNotifier.cs" />
     <Compile Include="DragBehavior.cs" />

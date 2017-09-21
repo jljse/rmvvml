@@ -95,9 +95,10 @@ namespace Rmvvml
             ShowingAdorner.Show();
 
             // とりあえずドラッグ風
+            // DragDropEffects.AllにLinkが含まれないバグ回避
             var data = new DataObject();
             data.SetData(DataType?.ToString() ?? "test", AssociatedObject.DataContext);
-            DragDrop.DoDragDrop(AssociatedObject, data, DragDropEffects.All);
+            DragDrop.DoDragDrop(AssociatedObject, data, DragDropEffects.All | DragDropEffects.Link);
 
             ShowingAdorner.Hide();
             ShowingAdorner = null;

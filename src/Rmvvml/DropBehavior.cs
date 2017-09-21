@@ -52,6 +52,23 @@ namespace Rmvvml
 
         #endregion
 
+
+        #region Effects
+        /// <summary>
+        /// ドロップ可能時に表示するカーソル
+        /// </summary>
+        public DragDropEffects Effects
+        {
+            get { return (DragDropEffects)GetValue(EffectsProperty); }
+            set { SetValue(EffectsProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Effects.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty EffectsProperty =
+            DependencyProperty.Register("Effects", typeof(DragDropEffects), typeof(DropBehavior), new PropertyMetadata(DragDropEffects.Copy));
+        #endregion
+
+
         /// <summary>
         /// 現在表示中のAdorner
         /// 
@@ -74,6 +91,11 @@ namespace Rmvvml
         bool IsAcceptable { get; set; } = false;
 
         /// <summary>
+        /// このインスタンスより優先順位が高いもの
+        /// </summary>
+        HashSet<DropBehavior> Intercepters { get; } = new HashSet<DropBehavior>();
+
+        /// <summary>
         /// 現在ドロップ先Adorner
         /// </summary>
         bool IsShowAdorner
@@ -86,6 +108,7 @@ namespace Rmvvml
             base.OnAttached();
             AssociatedObject.Drop += OnDrop;
             AssociatedObject.PreviewDragOver += OnPreviewDragOver;
+            AssociatedObject.DragOver += OnDragOver;
         }
 
         // MouseEnter/Leaveの挙動とDragEnter/Leaveの挙動が違う...マウスキャプチャしてる関係と思われる
@@ -134,19 +157,19 @@ namespace Rmvvml
                 //   まず親に表示中のやつがいないかチェックして、いれば隠す
                 //   それから自分を表示
 
-                if (IsAcceptable && !IsShowAdorner)
+                if (IsAcceptable)
                 {
-                    var active = VisualTreeHelperExtension
+                    var ancestors = VisualTreeHelperExtension
                         .AncestorsOrSelf(AssociatedObject)
                         .Behaviors()
                         .OfType<DropBehavior>()
                         .Where(b => b != this)
-                        .Where(b => b.IsShowAdorner)
-                        .FirstOrDefault();
+                        .Where(b => b.IsAcceptable)
+                        ;
 
-                    if (active != null)
+                    foreach (var ancestor in ancestors)
                     {
-                        active.HideIndicator();
+                        ancestor.AddIntercepter(this);
                     }
 
                     this.ShowIndicator();
@@ -178,20 +201,42 @@ namespace Rmvvml
                 {
                     this.HideIndicator();
 
-                    var acceptable = VisualTreeHelperExtension
+                    var ancestors = VisualTreeHelperExtension
                         .AncestorsOrSelf(AssociatedObject)
                         .Behaviors()
                         .OfType<DropBehavior>()
                         .Where(b => b != this)
-                        .Where(b => b.IsAcceptable)
-                        .FirstOrDefault();
+                        ;
 
-                    if (acceptable != null)
+                    foreach (var ancestor in ancestors)
                     {
-                        acceptable.ShowIndicator();
+                        ancestor.RemoveIntercepter(this);
                     }
                 }
 
+            }
+        }
+
+        /// <summary>
+        /// このインスタンスより優先度の高いドロップ対象を追加
+        /// </summary>
+        /// <param name="intercepter"></param>
+        void AddIntercepter(DropBehavior intercepter)
+        {
+            Intercepters.Add(intercepter);
+            HideIndicator();
+        }
+
+        /// <summary>
+        /// このインスタンスより優先度の高いドロップ対象を除去
+        /// </summary>
+        /// <param name="intercepter"></param>
+        void RemoveIntercepter(DropBehavior intercepter)
+        {
+            Intercepters.Remove(intercepter);
+            if(Intercepters.Count == 0 && IsAcceptable)
+            {
+                ShowIndicator();
             }
         }
 
@@ -224,6 +269,15 @@ namespace Rmvvml
                     );
                 ShowingAdorner = new DropAdorner(AssociatedObject);
                 ShowingAdorner.Show();
+            }
+        }
+
+        private void OnDragOver(object sender, DragEventArgs e)
+        {
+            if(IsShowAdorner)
+            {
+                e.Effects = Effects;
+                e.Handled = true;
             }
         }
 

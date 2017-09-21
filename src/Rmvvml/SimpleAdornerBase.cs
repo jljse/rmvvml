@@ -63,5 +63,11 @@ namespace Rmvvml
             AdornerLayer layer = AdornerLayer.GetAdornerLayer(AdornedElement);
             layer.Remove(this);
         }
+
+        public void Update()
+        {
+            AdornerLayer layer = AdornerLayer.GetAdornerLayer(AdornedElement);
+            layer.Update(AdornedElement);
+        }
     }
 }
