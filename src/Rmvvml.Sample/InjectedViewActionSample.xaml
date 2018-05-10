@@ -1,0 +1,23 @@
+﻿<Window x:Class="Rmvvml.Sample.InjectedViewActionSample"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Rmvvml.Sample"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+        xmlns:rmvvml="clr-namespace:Rmvvml;assembly=Rmvvml"
+        mc:Ignorable="d"
+        Title="AttachedPropertyActionSample" Height="300" Width="300"
+        local:InjectedViewActionSampleAtt.MinimizeAction="{Binding MinimizeAction}"
+        >
+    <i:Interaction.Triggers>
+        <rmvvml:InjectedViewActionTrigger Trigger="{Binding MaximizeAction}">
+            <ei:ChangePropertyAction PropertyName="WindowState" Value="Maximized" />
+        </rmvvml:InjectedViewActionTrigger>
+    </i:Interaction.Triggers>
+    <StackPanel>
+        <Button Content="Minimize by attached property" Command="{Binding MinimizeCommand}" />
+        <Button Content="Maximize by blend trigger" Command="{Binding MaximizeCommand}" />
+    </StackPanel>
+</Window>

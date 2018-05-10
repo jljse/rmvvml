@@ -21,13 +21,26 @@
             <rmvvml:MessageBoxWindowHandler />
         </DataTemplate>
 
-
         <!-- ViewModelとViewの対応関係 TemplateにWindowを入れるとXAMLパースエラーになるけど動くから無視だ！ -->
-        <DataTemplate DataType="{x:Type local:MainWindowVM}">
-            <local:MainWindow />
+        <DataTemplate DataType="{x:Type local:WindowsControlSampleVM}">
+            <local:WindowsControlSample />
         </DataTemplate>
-        <DataTemplate DataType="{x:Type local:ChildWindowVM}">
-            <local:ChildWindow />
+
+        <DataTemplate DataType="{x:Type local:WindowsControlSampleChildVM}">
+            <Window>CHILD</Window>
         </DataTemplate>
+
+        <DataTemplate DataType="{x:Type local:QueryClosingBehaviorSampleVM}">
+            <local:QueryClosingBehaviorSample />
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type local:MultiSelectorAttSampleVM}">
+            <local:MultiSelectorAttSample />
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type local:InjectedViewActionSampleVM}">
+            <local:InjectedViewActionSample />
+        </DataTemplate>
+
     </Application.Resources>
 </Application>

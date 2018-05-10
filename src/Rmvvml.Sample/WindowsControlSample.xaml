@@ -1,0 +1,19 @@
+﻿<Window x:Class="Rmvvml.Sample.WindowsControlSample"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Rmvvml.Sample"
+        mc:Ignorable="d"
+        Title="WindowsControlSample" Height="300" Width="300"
+        >
+    <Grid>
+        <StackPanel>
+            <Button Content="WindowsControl" Command="{Binding WindowsControlCommand}" />
+            <Button Content="MessageBox" Command="{Binding MessageBoxCommand}" />
+            <Button Content="QueryClosingBehavior" Command="{Binding QueryClosingBehaviorCommand}" />
+            <Button Content="MultiSelectorAtt" Command="{Binding MultiSelectorAttCommand}" />
+            <Button Content="AttachedPropertyAction" Command="{Binding AttachedPropertyActionCommand}" />
+        </StackPanel>
+    </Grid>
+</Window>

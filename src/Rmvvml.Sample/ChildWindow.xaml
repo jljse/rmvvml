@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Rmvvml.Sample"
         xmlns:rmvvml="clr-namespace:Rmvvml;assembly=Rmvvml"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         mc:Ignorable="d"
         Title="ChildWindow" Height="300" Width="300">
     <Grid Margin="0,10,0,0">
@@ -12,6 +13,9 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" Orientation="Horizontal">
             <StackPanel.Resources>
@@ -27,6 +31,63 @@
             <TextBox Text="focus" local:TextBoxAtt.FocusAction="{Binding FocusTextBoxAction}" />
             <Button Content="call" Command="{Binding CallButtonCommand}" />
         </StackPanel>
-        <Button Grid.Row="2" Content="close child" Command="{Binding CloseChildCommand}" />
+        <StackPanel Grid.Row="2" Orientation="Horizontal">
+            <TextBox Width="50" Text="{Binding Check1}" />
+            <TextBox Width="50" Text="{Binding Check2}" />
+            <TextBox Width="50" Text="{Binding Check3}" />
+        </StackPanel>
+        <StackPanel Grid.Row="3" Orientation="Horizontal">
+            <Border BorderBrush="Red" BorderThickness="3" Background="Pink">
+                <i:Interaction.Behaviors>
+                    <rmvvml:DragBehavior DataType="TYPE1" />
+                </i:Interaction.Behaviors>
+                <TextBlock Text="Drag from" />
+            </Border>
+            <Border BorderBrush="Blue" BorderThickness="5" Background="LightBlue" AllowDrop="True">
+                <i:Interaction.Behaviors>
+                    <rmvvml:DropBehavior DataType="TYPE1" />
+                </i:Interaction.Behaviors>
+                
+                <Border BorderBrush="Cyan" BorderThickness="5" Background="LightGray">
+                    <i:Interaction.Behaviors>
+                        <rmvvml:DropBehavior DataType="TYPE1" />
+                    </i:Interaction.Behaviors>
+                    
+                    <TextBlock Text="Drop to" />
+                </Border>
+            </Border>
+        </StackPanel>
+        <Button Grid.Row="4" Content="close child" Command="{Binding CloseChildCommand}" />
+        <Grid Grid.Row="5">
+            <local:MyMultiSelecter ItemsSource="{Binding MultiSelecterSource}" Background="Transparent">
+                <local:MyMultiSelecter.Resources>
+                    <DataTemplate DataType="{x:Type local:BoxVM}">
+                        <Border BorderThickness="3">
+                            <Border.Style>
+                                <Style TargetType="{x:Type Border}">
+                                    <Setter Property="BorderBrush" Value="Blue" />
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding IsSelected}" Value="True">
+                                            <Setter Property="BorderBrush" Value="Yellow" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+                            <TextBlock Text="{Binding Text}" />
+                        </Border>
+                    </DataTemplate>
+                </local:MyMultiSelecter.Resources>
+                <local:MyMultiSelecter.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel />
+                    </ItemsPanelTemplate>
+                </local:MyMultiSelecter.ItemsPanel>
+                <local:MyMultiSelecter.ItemContainerStyle>
+                    <Style TargetType="{x:Type local:MyMultiSelecterItem}">
+                        <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=OneWayToSource}" />
+                    </Style>
+                </local:MyMultiSelecter.ItemContainerStyle>
+            </local:MyMultiSelecter>
+        </Grid>
     </Grid>
 </Window>

@@ -14,23 +14,23 @@ namespace Rmvvml.Sample
     {
         #region FocusAction
 
-        public static AttachedPropertyAction GetFocusAction(DependencyObject obj)
+        public static InjectedViewAction GetFocusAction(DependencyObject obj)
         {
-            return (AttachedPropertyAction)obj.GetValue(FocusActionProperty);
+            return (InjectedViewAction)obj.GetValue(FocusActionProperty);
         }
 
-        public static void SetFocusAction(DependencyObject obj, AttachedPropertyAction value)
+        public static void SetFocusAction(DependencyObject obj, InjectedViewAction value)
         {
             obj.SetValue(FocusActionProperty, value);
         }
 
         // Using a DependencyProperty as the backing store for FocusAction.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty FocusActionProperty =
-            DependencyProperty.RegisterAttached("FocusAction", typeof(AttachedPropertyAction), typeof(TextBoxAtt), new PropertyMetadata(null, OnFocusActionChanged));
+            DependencyProperty.RegisterAttached("FocusAction", typeof(InjectedViewAction), typeof(TextBoxAtt), new PropertyMetadata(null, OnFocusActionChanged));
 
         private static void OnFocusActionChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            AttachedPropertyActionHandler<TextBox, object>.Inject(FocusActionProperty, d, e, (control, param) =>
+            InjectedViewActionHandler<TextBox, object>.Inject(FocusActionProperty, d, e, (control, param) =>
             {
                 // ViewModel側からInvokeされた時に実行したい処理をここに書く
                 control.Focus();

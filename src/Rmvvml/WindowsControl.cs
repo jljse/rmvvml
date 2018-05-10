@@ -97,30 +97,38 @@ namespace Rmvvml
                         {
                             // VMの型からDataTemplateを探し、対応するViewを生成する
                             var key = new DataTemplateKey(item.GetType());
-                            var template = FindResource(key) as DataTemplate;
-                            var content = template.LoadContent();
+                            var template = TryFindResource(key) as DataTemplate;
+                            if(template != null)
+                            {
+                                var content = template.LoadContent();
 
-                            if (content is FrameworkElement)
-                            {
-                                var fe = content as FrameworkElement;
-                                fe.DataContext = item;
-                            }
+                                if (content is FrameworkElement)
+                                {
+                                    var fe = content as FrameworkElement;
+                                    fe.DataContext = item;
+                                }
 
-                            if (content is Window)
-                            {
-                                var win = content as Window;
-                                AddWindow(win);
-                            }
-                            else if (content is IVolatileWindowHandler)
-                            {
-                                var vol = content as IVolatileWindowHandler;
-                                ShowAndDeleteVolatileWindow(vol);
+                                if (content is Window)
+                                {
+                                    var win = content as Window;
+                                    AddWindow(win);
+                                }
+                                else if (content is IVolatileWindowHandler)
+                                {
+                                    var vol = content as IVolatileWindowHandler;
+                                    ShowAndDeleteVolatileWindow(vol);
+                                }
+                                else
+                                {
+                                    // 自動でラップすることもできるが、バグの温床になりそうなので例外
+                                    throw new InvalidCastException("Content of DataTemplate must be Window");
+                                }
                             }
                             else
                             {
-                                // 自動でラップしても正しく動くけど、勝手にウィンドウを作るとわけがわからなくなりそうなのでやめた
-                                // win = new Window { Content = content, };
-                                throw new InvalidCastException("Content of DataTemplate must be Window");
+                                // テンプレートがない場合エラーにしてもいいが、単にウィンドウを表示する
+                                var win = new Window { Content = item, };
+                                AddWindow(win);
                             }
                         }
                         break;
