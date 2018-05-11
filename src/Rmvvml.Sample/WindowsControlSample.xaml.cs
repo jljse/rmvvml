@@ -111,6 +111,21 @@ namespace Rmvvml.Sample
             App.WindowsControlViewModel.ItemsSource.Add(new InjectedViewActionSampleVM());
         }
         #endregion
+
+        #region RadioButtonAttCommand
+        RelayCommand _RadioButtonAttCommand;
+        public RelayCommand RadioButtonAttCommand
+        {
+            get
+            {
+                return _RadioButtonAttCommand ?? (_RadioButtonAttCommand = new RelayCommand(OnRadioButtonAttCommand));
+            }
+        }
+        void OnRadioButtonAttCommand()
+        {
+            App.WindowsControlViewModel.ItemsSource.Add(new RadioButtonAttSampleVM());
+        }
+        #endregion
     }
 
     class WindowsControlSampleChildVM : ViewModelBase, IShowDialog

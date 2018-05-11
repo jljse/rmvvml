@@ -18,14 +18,10 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" Orientation="Horizontal">
-            <StackPanel.Resources>
-                <rmvvml:EnumToRadioButtonConverter x:Key="e2r" />
-            </StackPanel.Resources>
-            
             <TextBlock Text="{Binding RadioSelectedValue}" />
-            <RadioButton Content="AAA" IsChecked="{Binding RadioSelectedValue, Converter={StaticResource e2r}, ConverterParameter=AAA}" />
-            <RadioButton Content="BBB" IsChecked="{Binding RadioSelectedValue, Converter={StaticResource e2r}, ConverterParameter=BBB}" />
-            <RadioButton Content="CCC" IsChecked="{Binding RadioSelectedValue, Converter={StaticResource e2r}, ConverterParameter=CCC}" />
+            <RadioButton Content="AAA" rmvvml:RadioButtonAtt.CheckFor="{Binding RadioSelectedValue}" rmvvml:RadioButtonAtt.SelectedValue="AAA" />
+            <RadioButton Content="BBB" rmvvml:RadioButtonAtt.CheckFor="{Binding RadioSelectedValue}" rmvvml:RadioButtonAtt.SelectedValue="BBB" />
+            <RadioButton Content="CCC" rmvvml:RadioButtonAtt.CheckFor="{Binding RadioSelectedValue}" rmvvml:RadioButtonAtt.SelectedValue="CCC" />
         </StackPanel>
         <StackPanel Grid.Row="1" Orientation="Horizontal">
             <TextBox Text="focus" local:TextBoxAtt.FocusAction="{Binding FocusTextBoxAction}" />

@@ -14,6 +14,7 @@
             <Button Content="QueryClosingBehavior" Command="{Binding QueryClosingBehaviorCommand}" />
             <Button Content="MultiSelectorAtt" Command="{Binding MultiSelectorAttCommand}" />
             <Button Content="AttachedPropertyAction" Command="{Binding AttachedPropertyActionCommand}" />
+            <Button Content="RadioButtonAtt" Command="{Binding RadioButtonAttCommand}" />
         </StackPanel>
     </Grid>
 </Window>
