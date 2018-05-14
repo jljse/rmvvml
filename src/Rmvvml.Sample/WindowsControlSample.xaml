@@ -13,8 +13,9 @@
             <Button Content="MessageBox" Command="{Binding MessageBoxCommand}" />
             <Button Content="QueryClosingBehavior" Command="{Binding QueryClosingBehaviorCommand}" />
             <Button Content="MultiSelectorAtt" Command="{Binding MultiSelectorAttCommand}" />
-            <Button Content="AttachedPropertyAction" Command="{Binding AttachedPropertyActionCommand}" />
+            <Button Content="InjectedViewAction" Command="{Binding InjectedViewActionCommand}" />
             <Button Content="RadioButtonAtt" Command="{Binding RadioButtonAttCommand}" />
+            <Button Content="ChildWindow2" Command="{Binding ChildWindow2Command}" />
         </StackPanel>
     </Grid>
 </Window>

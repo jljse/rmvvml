@@ -87,6 +87,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ChildWindow2.xaml.cs">
+      <DependentUpon>ChildWindow2.xaml</DependentUpon>
+    </Compile>
     <Compile Include="InjectedViewActionSample.xaml.cs">
       <DependentUpon>InjectedViewActionSample.xaml</DependentUpon>
     </Compile>
@@ -102,6 +105,10 @@
     <Compile Include="WindowsControlSample.xaml.cs">
       <DependentUpon>WindowsControlSample.xaml</DependentUpon>
     </Compile>
+    <Page Include="ChildWindow2.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="InjectedViewActionSample.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

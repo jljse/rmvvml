@@ -97,16 +97,16 @@ namespace Rmvvml.Sample
         }
         #endregion
 
-        #region AttachedPropertyActionCommand
-        RelayCommand _AttachedPropertyActionCommand;
-        public RelayCommand AttachedPropertyActionCommand
+        #region InjectedViewActionCommand
+        RelayCommand _InjectedViewActionCommand;
+        public RelayCommand InjectedViewActionCommand
         {
             get
             {
-                return _AttachedPropertyActionCommand ?? (_AttachedPropertyActionCommand = new RelayCommand(OnAttachedPropertyActionCommand));
+                return _InjectedViewActionCommand ?? (_InjectedViewActionCommand = new RelayCommand(OnInjectedViewActionCommand));
             }
         }
-        void OnAttachedPropertyActionCommand()
+        void OnInjectedViewActionCommand()
         {
             App.WindowsControlViewModel.ItemsSource.Add(new InjectedViewActionSampleVM());
         }
@@ -124,6 +124,21 @@ namespace Rmvvml.Sample
         void OnRadioButtonAttCommand()
         {
             App.WindowsControlViewModel.ItemsSource.Add(new RadioButtonAttSampleVM());
+        }
+        #endregion
+
+        #region ChildWindow2Command
+        RelayCommand _ChildWindow2Command;
+        public RelayCommand ChildWindow2Command
+        {
+            get
+            {
+                return _ChildWindow2Command ?? (_ChildWindow2Command = new RelayCommand(OnChildWindow2Command));
+            }
+        }
+        void OnChildWindow2Command()
+        {
+            App.WindowsControlViewModel.ItemsSource.Add(new ChildWindow2VM());
         }
         #endregion
     }

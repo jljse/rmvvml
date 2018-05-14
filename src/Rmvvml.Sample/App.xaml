@@ -47,5 +47,9 @@
             <local:RadioButtonAttSample />
         </DataTemplate>
 
+        <DataTemplate DataType="{x:Type local:ChildWindow2VM}">
+            <local:ChildWindow2 />
+        </DataTemplate>
+
     </Application.Resources>
 </Application>
