@@ -68,6 +68,7 @@
     <Compile Include="DropBehavior.cs" />
     <Compile Include="IEnumerableExtension.cs" />
     <Compile Include="InjectedViewActionTrigger.cs" />
+    <Compile Include="InteractionAtt.cs" />
     <Compile Include="MessageBoxWindowHandler.cs" />
     <Compile Include="MovableInCanvasBehavior.cs" />
     <Compile Include="MultiSelectorSelectedItemsHandler.cs" />
