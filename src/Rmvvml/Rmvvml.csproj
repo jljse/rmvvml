@@ -60,6 +60,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ColorConverter.cs" />
+    <Compile Include="GridExpandBehavior.cs" />
     <Compile Include="GridLengthAnimation.cs" />
     <Compile Include="InjectedViewAction.cs" />
     <Compile Include="AutoScrollByDragBehavior.cs" />
