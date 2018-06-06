@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Rmvvml</id>
+    <version>0.1.0</version>
+    <title>rmvvml</title>
+    <authors>jljse</authors>
+    <owners>jljse</owners>
+    <licenseUrl>https://opensource.org/licenses/MIT</licenseUrl>
+    <projectUrl>https://github.com/jljse/rmvvml</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>MVVM Library for C# WPF</description>
+    <releaseNotes>First release.</releaseNotes>
+    <copyright>Copyright 2018</copyright>
+    <tags>wpf mvvm</tags>
+  </metadata>
+</package>
